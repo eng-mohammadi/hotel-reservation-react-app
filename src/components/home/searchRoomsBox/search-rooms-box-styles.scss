@@ -1,0 +1,80 @@
+@import "../../../styles/_fonts";
+@import "../../../styles/_generals";
+
+.search-box {
+  width: 100%;
+  h3 {
+    font-family: "Vazir 700";
+    color: $primary-text__color;
+    font-size: 1.2rem;
+    margin: 20px;
+  }
+  .search-box__container {
+    input {
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      padding: 7px;
+      font-family: "Iran Sans 700";
+      margin: 20px;
+      &:focus {
+        outline: none;
+        border-color: darken(#84d3ec, 20%);
+      }
+    }
+    select {
+      border: 1px solid #000;
+      border-radius: 10px;
+      padding: 5px;
+      font-family: "Iran Sans 500";
+      margin: 20px;
+      &:focus {
+        outline: none;
+        border-color: darken(#84d3ec, 20%);
+      }
+    }
+    button {
+      border: 1px solid #000;
+      border-radius: 7px;
+      padding: 7px 10px;
+      font-family: "Iran Sans 500";
+      background-color: $secondary-color;
+      color: $secondary-text__color;
+      &:hover {
+        cursor: pointer;
+        background-color: darken($secondary-color, 40%);
+        color: #fff;
+      }
+    }
+  }
+  .search-rooms-result {
+    width: 100%;
+    margin-top: 25px;
+    .search-rooms-result__item {
+      width: 100%;
+      margin: 0 auto;
+      padding: 10px;
+      h4 {
+        font-family: "Vazir 700";
+        color: $primary-text__color;
+      }
+      .search-rooms-result__images {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        img {
+          width: 250px;
+          height: 250px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+        }
+      }
+      p {
+        font-family: "Iran Sans 700";
+        color: $secondary-text__color;
+        margin: 10px 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@import "../../../styles/_generals";
+@import "../../../styles/_fonts";
+
+.room-cards {
+  width: 100%;
+  height: 530px;
+  padding: 10px;
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  a {
+    text-decoration: none;
+    .room-card__box {
+      width: 330px;
+      height: 500px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 10px 10px 6px rgba(62, 5, 11, 0.5);
+      background-color: $bg-color__room--card;
+      .room-image {
+        text-align: center;
+        img {
+          width: 250px;
+          height: 250px;
+          border-radius: 10px;
+        }
+      }
+      .room-name {
+        font-family: "Iran Sans 700";
+      }
+      p {
+        margin: 6px 0;
+        color: $primary-text__color;
+      }
+      ul {
+        margin: 5px 0;
+        li {
+          color: #077d07;
+        }
+      }
+      &:hover {
+        transform: scale(1.02);
+        transition: all 0.5s ease;
+        img {
+          box-shadow: 10px 10px 6px rgba(228, 91, 185, 0.5);
+        }
+      }
+    }
+  }
+}
+
+hr {
+  width: 90%;
+  margin-top: 25px;
+  border: 1.5px solid #000;
+}

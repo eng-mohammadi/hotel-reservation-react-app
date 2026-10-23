@@ -1,0 +1,220 @@
+{
+  "rooms": [
+    {
+      "id": "1",
+      "name": "اتاق دو تخته استاندارد",
+      "images": [
+        "/images/rooms/standard-room/23074-09-18_Hotel_International_Rooms_Classic_Queen_1_2000px_sivgq2.webp",
+        "/images/rooms/standard-room/31032098-62c3-4e0a-8d87-b03e4c92b62a.avif",
+        "/images/rooms/standard-room/images.jpg",
+        "/images/rooms/standard-room/IMGL6303xxx.jpg",
+        "/images/rooms/standard-room/Standard-Room-2.jpg",
+        "/images/rooms/standard-room/Standard-Room-_13mb-5-1024x683.jpg"
+      ],
+      "capacity": 2,
+      "pricePerNight": 2300000,
+      "amenities": ["وای فای", "تلویزیون", "یخچال", "قهوه ساز"]
+    },
+    {
+      "id": "2",
+      "name": "سوئیت خانوادگی",
+      "images": [
+        "/images/rooms/family-suite/family-suite-3-2023_standard.jpg",
+        "/images/rooms/family-suite/family-suite-room-interior-deluxe-twin-2.webp",
+        "/images/rooms/family-suite/familysuite-hero-desktop.webp",
+        "/images/rooms/family-suite/images (1).jpg",
+        "/images/rooms/family-suite/images.jpg",
+        "/images/rooms/family-suite/royal-caribbean-international_icon-of-the-seas_surfside-family-suite_rendering_18911442.jpg"
+      ],
+      "capacity": 4,
+      "pricePerNight": 3800000,
+      "amenities": ["وای فای", "تلویزیون کابلی", "آشپزخانه کوچک", "بالکن خصوصی"]
+    },
+    {
+      "id": "3",
+      "name": "اتاق یک تخته لوکس",
+      "images": [
+        "/images/rooms/deluxe-single-room/bell-hotel-chennai.jpg",
+        "/images/rooms/deluxe-single-room/Deluxe-Single-2-650x400.jpg",
+        "/images/rooms/deluxe-single-room/images (1).jpg",
+        "/images/rooms/deluxe-single-room/images.jpg",
+        "/images/rooms/deluxe-single-room/new-single-deluxe-photo-scaled.jpg",
+        "/images/rooms/deluxe-single-room/single-deluxer-room-feature-1.jpg"
+      ],
+      "capacity": 1,
+      "pricePerNight": 1500000,
+      "amenities": ["وای فای", "یخچال", "سشوار"]
+    }
+  ],
+  "foods": [
+    {
+      "id": "1",
+      "name": "امریکایی",
+      "category": "صبحانه",
+      "image": "/images/foods/breakfast/american2.webp",
+      "description": "2 عدد تخم مرغ نیمرو عسلی، استیک گوشت، سوسیس کوکتل، بیکن گوشت، قارچ، پنیر، لوبیا گرم، یک لیوان آبمیوه طبیعی، یک کاپ لاته به همراه نان تست مخصوص سه میم و نان سنگگ و دورچین خیارشور ، زیتون ، سبزی و لیمو",
+      "price": 300000
+    },
+    {
+      "id": "2",
+      "name": "(قاره ای) کانتیننتال",
+      "category": "صبحانه",
+      "image": "/images/foods/breakfast/continental.webp",
+      "description": "تخم مرغ، سوسیس، بیکن، نان تست، کره، مربا، قهوه یا چای",
+      "price": 300000
+    },
+    {
+      "id": "3",
+      "name": "انگلیسی",
+      "category": "صبحانه",
+      "image": "/images/foods/breakfast/english.webp",
+      "description": " بیکن، سوسیس، نیمرو، پودینگ سیاه، خوراک لوبیا، گوجه فرنگی، قارچ، نان تست، قهوه یا چای ",
+      "price": 320000
+    },
+    {
+      "id": "4",
+      "name": "سلف سرویس",
+      "category": "صبحانه",
+      "image": "/images/foods/breakfast/self-service.webp",
+      "price": 350000
+    },
+    {
+      "id": "5",
+      "name": "باقالی پلو با گردن",
+      "category": "ناهار",
+      "image": "/images/foods/lunch/baghali-polo-ba-gardan.jpg",
+      "price": 800000
+    },
+    {
+      "id": "6",
+      "name": "باقالی پلو با ماهیچه",
+      "category": "ناهار",
+      "image": "/images/foods/lunch/baghali-polo-ba-mahicheh.webp",
+      "description": "برنج با طعم دارچین و زعفران، همراه با ماهیچه پخته شده",
+      "price": 560000
+    },
+    {
+      "id": "7",
+      "name": "قیمه بادمجان",
+      "category": "ناهار",
+      "image": "/images/foods/lunch/gheymeh-bademjan.jpg",
+      "description": "برنج با طعم دارچین و زعفران، همراه با ماهیچه پخته شده",
+      "price": 320000
+    },
+    {
+      "id": "8",
+      "name": "خورشت فسنجان مرغ",
+      "category": "ناهار",
+      "image": "/images/foods/lunch/khoresht-fesenjoon-morgh.jpg",
+      "description": "خورشت فسنجان مرغ با برنج زعفرانی",
+      "price": 420000
+    },
+    {
+      "id": "9",
+      "name": "ماهی سالمون گریل شده",
+      "category": "ناهار",
+      "image": "/images/foods/lunch/mahi-salmon-girilshodeh.jpg",
+      "description": "ماهی سالمون گریل شده با سبزیجات بخارپز",
+      "price": 620000
+    },
+    {
+      "id": "10",
+      "name": "زرشک پلو",
+      "category": "ناهار",
+      "image": "/images/foods/lunch/zereshkpolo.webp",
+      "description": "برنج زعفرانی با زرشک و مرغ",
+      "price": 590000
+    },
+    {
+      "id": "11",
+      "name": "چنجه",
+      "category": "شام",
+      "image": "/images/foods/dinner/chenjeh.jpg",
+      "description": "کباب چنجه به همراه گوجه و فلفل",
+      "price": 410000
+    },
+    {
+      "id": "12",
+      "name": "غفغازی",
+      "category": "شام",
+      "image": "/images/foods/dinner/ghafghazi.jpg",
+      "description": "کباب غفغازی با برنج زعفرانی",
+      "price": 540000
+    },
+    {
+      "id": "13",
+      "name": "جوجه بدون استخوان",
+      "category": "شام",
+      "image": "/images/foods/dinner/joojeh-bedone-ostokhan.jpg",
+      "description": "جوجه بدون استخوان با برنج زعفرانی",
+      "price": 530000
+    },
+    {
+      "id": "14",
+      "name": "جوجه کباب با استخوان",
+      "category": "شام",
+      "image": "/images/foods/dinner/joojeh-kabab-ba-ostokhan.jpg",
+      "description": "جوجه کباب به همزاه گوجه و فلفل",
+      "price": 500000
+    },
+    {
+      "id": "15",
+      "name": "کباب شیشلیک",
+      "category": "شام",
+      "image": "/images/foods/dinner/kabab-shishlik.jpg",
+      "description": "کباب شیشلیک با برنج زعفرانی",
+      "price": 670000
+    },
+    {
+      "id": "16",
+      "name": "مرغ پسته",
+      "category": "شام",
+      "image": "/images/foods/dinner/morghe-peste.webp",
+      "description": "مرغ پسته با برنج زعفرانی",
+      "price": 800000
+    },
+    {
+      "id": "17",
+      "name": "بورانی",
+      "category": "پیش غذا",
+      "image": "/images/foods/appetizer/boorani.jpg",
+      "description": "بورانی با ماست و سبزیجات",
+      "price": 250000
+    },
+    {
+      "id": "18",
+      "name": "کوکو سبزی",
+      "category": "پیش غذا",
+      "image": "/images/foods/appetizer/koko-sabzi.jpg",
+      "description": "کوکو سبزی با سبزیجات تازه",
+      "price": 120000
+    },
+    {
+      "id": "19",
+      "name": "اولویه",
+      "category": "پیش غذا",
+      "image": "/images/foods/appetizer/oloviye.jpg",
+      "description": "سالاد الویه با سیب زمینی و تن ماهی",
+      "price": 150000
+    },
+    {
+      "id": "20",
+      "name": "سوپ",
+      "category": "پیش غذا",
+      "image": "/images/foods/appetizer/soop.jpg",
+      "description": "سوپ با سبزیجات و ادویه‌جات",
+      "price": 80000
+    },
+    {
+      "id": "21",
+      "name": "تافتون",
+      "category": "پیش غذا",
+      "image": "/images/foods/appetizer/taftoon.webp",
+      "description": "نان تافتون تازه",
+      "price": 35000
+    }
+  ],
+  "accounting": [],
+  "roomReservation": [],
+  "foodReservation": []
+}

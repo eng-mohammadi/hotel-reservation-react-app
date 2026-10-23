@@ -1,0 +1,162 @@
+@import "../../styles/_fonts";
+@import "../../styles/_generals";
+
+.food-reservation {
+  width: 100%;
+  margin: 30px 0;
+  padding: 10px;
+  table {
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+    thead {
+      tr {
+        th {
+          font-family: "Iran Sans 700";
+          color: $primary-text__color;
+          background-color: $bg-color__food--card;
+          padding: 5px;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          border: 1px solid #ccc;
+          font-family: "Vazir 500";
+          color: $secondary-text__color;
+          padding: 5px;
+          text-align: center;
+          .quantity-control {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .fa-plus {
+              &:hover {
+                cursor: pointer;
+                color: #14f314;
+              }
+            }
+            .fa-minus {
+              &:hover {
+                color: red;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .total-price {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    h3 {
+      font-family: "Iran Sans 700";
+      color: $primary-text__color;
+      font-size: 1.6rem;
+    }
+    button {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px 15px;
+      background-color: darken(#14f314, 20%);
+      font-family: "Vazir 700";
+      color: $primary-text__color;
+      font-size: 1.2rem;
+      &:hover {
+        background-color: #14f314;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.cart-box {
+  width: 100%;
+  margin: 30px 0;
+  h2 {
+    font-family: "Iran Sans 700";
+    color: $primary-text__color;
+    margin-right: 30px;
+  }
+  table {
+    width: 85%;
+    margin: 30px auto;
+    padding: 10px;
+    thead {
+      tr {
+        th {
+          padding: 10px;
+          border: 1px solid #ccc;
+          font-family: "Aviny 700";
+          color: $primary-text__color;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding: 10px;
+          border: 1px solid #ccc;
+          font-family: "Vazir 700";
+          text-align: center;
+          color: $secondary-text__color;
+          i {
+            &:hover {
+              cursor: pointer;
+              color: $accent-color;
+            }
+          }
+        }
+      }
+      .quantity-control {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        .fa-plus {
+          &:hover {
+            cursor: pointer;
+            color: #14f314;
+          }
+        }
+        .fa-minus {
+          &:hover {
+            color: red;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .total-price {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    h3 {
+      font-family: "Iran Sans 700";
+      color: $primary-text__color;
+      font-size: 1.6rem;
+    }
+    button {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px 15px;
+      background-color: darken(#14f314, 20%);
+      font-family: "Vazir 700";
+      color: $primary-text__color;
+      font-size: 1.2rem;
+      &:hover {
+        background-color: #14f314;
+        cursor: pointer;
+      }
+    }
+  }
+}

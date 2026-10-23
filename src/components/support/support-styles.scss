@@ -1,0 +1,34 @@
+@import "../../styles/_fonts";
+@import "../../styles/_generals";
+
+.support {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  h3 {
+    font-family: "Vazir 700";
+    font-size: 1.3rem;
+    color: $primary-text__color;
+  }
+  p {
+    font-family: "Aviny 700";
+    color: $secondary-text__color;
+  }
+  ul {
+    li {
+      display: inline-block;
+      list-style: none;
+      margin: 0 30px;
+      a {
+        text-decoration: none;
+        font-family: "Aviny 700";
+        font-size: 1.2rem;
+        color: $primary-text__color;
+        &:hover {
+          text-decoration: underline;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}

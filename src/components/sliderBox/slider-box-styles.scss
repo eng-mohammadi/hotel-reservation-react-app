@@ -1,0 +1,73 @@
+@import "../../styles/_fonts";
+@import "../../styles/_generals";
+
+.error-title {
+  font-family: "Iran Sans 700";
+  color: $primary-text__color;
+  font-size: 1.2rem;
+  color: red;
+  text-align: center;
+  margin: 20px;
+}
+
+.loading-title {
+  font-family: "Iran Sans 700";
+  color: $primary-text__color;
+  font-size: 1.3rem;
+  color: blue;
+  text-align: center;
+  margin: 20px;
+}
+
+.slider-container {
+  width: 60%;
+  margin: 10px auto;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  .slider-image {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  .slider-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 270px;
+    button {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px;
+      font-family: "Iran Sans 700";
+      margin: 0 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: #db96e9;
+        color: $primary-text__color;
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.slide-enter {
+  transform: translateX(100%);
+}
+.slide-enter-active {
+  transform: translateX(0);
+  transition: transform 500ms ease-in;
+}
+
+.slide-exit {
+  transform: translateX(0);
+}
+.slide-exit-active {
+  transform: translateX(-100%);
+  transition: transform 500ms ease-out;
+}

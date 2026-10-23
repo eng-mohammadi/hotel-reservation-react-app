@@ -1,0 +1,57 @@
+@import "../../../styles/_fonts";
+@import "../../../styles/_generals";
+
+.food-card__box {
+  width: 300px;
+  height: 350px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 10px 10px 6px rgba(62, 5, 11, 0.5);
+  background-color: $bg-color;
+  .food-image {
+    text-align: center;
+    a {
+      text-decoration: none;
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+      }
+    }
+  }
+  .food-name {
+    font-family: "Iran Sans 700";
+  }
+  p {
+    margin: 6px 0;
+    color: $primary-text__color;
+  }
+  .food-card__button {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    .food-card__icons {
+      i {
+        font-size: 1.3rem;
+        margin: 0 5px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    button {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-family: "Vazir 700";
+      background-color: $accent-color;
+      color: #fff;
+      &:hover {
+        cursor: pointer;
+        background-color: $secondary-color;
+        color: $primary-text__color;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import "../components/navbarMenu/navbar-menu-styles";
+@import "../components/footer/footer-styles";
+@import "../components/sliderBox/slider-box-styles.scss";
+@import "../components/home/roomCards/room-cards-styles";
+@import "../components/home/foodCards/food-cards-styles";
+@import "../components/home/foodCard/food-card-styles";
+@import "../components/home/searchFoodsBox/search-foods-box-styles.scss";
+@import "../components/home/searchRoomsBox/search-rooms-box-styles";
+@import "../components/roomDetails/room-details-styles.scss";
+@import "../components/foodDetails/food-details-styles.scss";
+@import "../components/cart/food-cart-styles.scss";
+@import "../components/accounting/accounting-styles.scss";
+@import "../components/accounting/register/register-styles.scss";
+@import "../components/accounting/login/login-styles.scss";
+@import "../components/roomReservation/room-reservation-styles.scss";
+@import "../components/roomReservation/editReservation/edit-reservation-styles.scss";
+@import "../components/roomReservation/newReservation/new-reservation-styles.scss";
+@import "../components/bookingTracking/booking-tracking-styles.scss";
+@import "../components/advertisement/advertisement-styles.scss";
+@import "../components/home/home-styles.scss";
+@import "../components/support/support-styles.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  direction: rtl;
+  background-color: $bg-color;
+}
