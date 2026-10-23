@@ -214,7 +214,23 @@
       "price": 35000
     }
   ],
-  "accounting": [],
+  "accounting": [
+    {
+      "email": "reza1@gmail.com",
+      "password": "125$Reza",
+      "confirmPassword": "125$Reza",
+      "terms": true,
+      "id": "NGhAcMiN4ms"
+    },
+    {
+      "email": "reza1@gmail.com",
+      "password": "125$Reza",
+      "confirmPassword": "125$Reza",
+      "terms": true,
+      "id": "jXHhpNQEi08"
+    }
+  ],
   "roomReservation": [],
-  "foodReservation": []
+  "foodReservation": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
