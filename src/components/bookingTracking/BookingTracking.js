@@ -28,19 +28,31 @@ const BookingTracking = ({
 }) => {
   const dispatch = useDispatch();
   const filteredRoomsByDate = useSelector((state) =>
-    selectFilteredRoomsByDate(state || [])
+    selectFilteredRoomsByDate(state || []),
   );
   const filteredFoodsByDate = useSelector((state) =>
-    selectFilteredFoodsByDate(state || [])
+    selectFilteredFoodsByDate(state || []),
   );
-  const { data: roomReservation } = useGetRoomReservationQuery();
-  const { data: foodReservation } = useGetFoodReservationQuery();
+  const { data: roomReservation = [] } = useGetRoomReservationQuery();
+  const { data: foodReservation = [] } = useGetFoodReservationQuery();
+
+  const validFoodReservations =
+    Array.isArray(foodReservation) ?
+      foodReservation.filter(
+        (food) =>
+          food &&
+          typeof food.foodName === "string" &&
+          food.foodName.trim() &&
+          typeof food.date === "string" &&
+          food.date.trim(),
+      )
+    : [];
+
   const [deleteFoodReservation] = useDeleteFoodReservationMutation();
   const [deleteRoomReservation] = useDeleteRoomReservationMutation();
   const [foodReservationDate, setFoodReservationDate] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
-
   const [flag, setFlag] = useState(false);
   const navigate = useNavigate();
 
@@ -51,7 +63,7 @@ const BookingTracking = ({
       filterRoomsByDate({
         checkInDate,
         checkOutDate,
-      })
+      }),
     );
     setFlag(!flag);
   };
@@ -65,7 +77,7 @@ const BookingTracking = ({
         checkInDate +
         " تا " +
         checkOutDate +
-        " حذف شد."
+        " حذف شد.",
     );
   };
 
@@ -76,15 +88,17 @@ const BookingTracking = ({
 
   const searchFoodSubmitHandler = (event) => {
     event.preventDefault();
-    dispatch(setFoods(foodReservation));
+    dispatch(setFoods(validFoodReservations));
     dispatch(filterFoodsByDate({ filterFoodDate: foodReservationDate }));
     setFlag(!flag);
   };
 
   const deleteFoodReservationHandler = (foodId, foodName) => {
     deleteFoodReservation(foodId);
-    dispatch(setFoods(foodReservation.filter((food) => food.id !== foodId)));
-    dispatch(filterFoodsByDate({ foodReservationDate }));
+    dispatch(
+      setFoods(validFoodReservations.filter((food) => food.id !== foodId)),
+    );
+    dispatch(filterFoodsByDate({ filterFoodDate: foodReservationDate }));
     window.alert("سفارش غذای " + foodName + " حذف شد.");
   };
 
@@ -97,13 +111,17 @@ const BookingTracking = ({
     <React.Fragment>
       <NavbarMenu />
       <hr />
+
       <div className="booking-tracking">
         <h3>در این بخش می‌توانید رزروهای ثبت شده خود را پیگیری کنید.</h3>
+
         <fieldset>
           <legend>پیگیری رزرو</legend>
-          <form onSubmit={(event) => searchRoomSubmitHandler(event)}>
+
+          <form onSubmit={searchRoomSubmitHandler}>
             <div className="search-reservation">
               <h4>جستجوی اتاق رزرو شده</h4>
+
               <label htmlFor="room-reservation-checkIn">تاریخ ورود رزرو:</label>
               <input
                 type="date"
@@ -112,6 +130,7 @@ const BookingTracking = ({
                 value={checkInDate}
                 onChange={(event) => setCheckInDate(event.target.value)}
               />
+
               <label htmlFor="room-reservation-checkOut">
                 تاریخ خروج رزرو:
               </label>
@@ -123,13 +142,16 @@ const BookingTracking = ({
                 onChange={(event) => setCheckOutDate(event.target.value)}
               />
             </div>
+
             <div className="booking-tracking__button">
               <button type="submit">جستجو</button>
             </div>
           </form>
-          <form onSubmit={(event) => searchFoodSubmitHandler(event)}>
+
+          <form onSubmit={searchFoodSubmitHandler}>
             <div className="search-reservation">
               <h4>جستجوی غذای سفارش شده</h4>
+
               <label htmlFor="food-reservation-date">تاریخ سفارش:</label>
               <input
                 type="date"
@@ -139,118 +161,130 @@ const BookingTracking = ({
                 onChange={(event) => setFoodReservationDate(event.target.value)}
               />
             </div>
+
             <div className="booking-tracking__button">
               <button type="submit">جستجو</button>
             </div>
           </form>
         </fieldset>
-        {flag ? (
-          filteredRoomsByDate.length > 0 || filteredFoodsByDate.length > 0 ? (
+
+        {flag ?
+          filteredRoomsByDate.length > 0 || filteredFoodsByDate.length > 0 ?
             <React.Fragment>
               <h4 className="search-results-title">نتایج جستجو:</h4>
+
               <div className="booking-tracking__results">
-                <div className="booking-tracking__room--result">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>نام رزرو کننده</th>
-                        <th>تاریخ ورود</th>
-                        <th>تاریخ خروج</th>
-                        <th>تعداد میهمان</th>
-                        <th>نوع اتاق</th>
-                        <th>حذف</th>
-                        <th>ویرایش</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredRoomsByDate.map((room) => (
-                        <tr key={room.id}>
-                          <td>
-                            {room.name} - {room.family}
-                          </td>
-                          <td>{room.checkIn}</td>
-                          <td>{room.checkOut}</td>
-                          <td>{room.guests}</td>
-                          <td>{room.roomType}</td>
-                          <td>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                deleteRoomReservationHandler(room.id)
-                              }
-                              className="delete-button"
-                            >
-                              حذف
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              type="button"
-                              className="edit-button"
-                              onClick={() => editRoomReservationHandler(room)}
-                            >
-                              ویرایش
-                            </button>
-                          </td>
+                {filteredRoomsByDate.length > 0 && (
+                  <div className="booking-tracking__room--result">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>نام رزرو کننده</th>
+                          <th>تاریخ ورود</th>
+                          <th>تاریخ خروج</th>
+                          <th>تعداد میهمان</th>
+                          <th>نوع اتاق</th>
+                          <th>حذف</th>
+                          <th>ویرایش</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+
+                      <tbody>
+                        {filteredRoomsByDate.map((room) => (
+                          <tr key={room.id}>
+                            <td>
+                              {room.name} - {room.family}
+                            </td>
+                            <td>{room.checkIn}</td>
+                            <td>{room.checkOut}</td>
+                            <td>{room.guests}</td>
+                            <td>{room.roomType}</td>
+                            <td>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  deleteRoomReservationHandler(room.id)
+                                }
+                                className="delete-button"
+                              >
+                                حذف
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                className="edit-button"
+                                onClick={() => editRoomReservationHandler(room)}
+                              >
+                                ویرایش
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
                 <div className="booking-tracking__food--result">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>نام غذا</th>
-                        <th>تاریخ رزرو</th>
-                        <th>وعده</th>
-                        <th>تعداد</th>
-                        <th>حذف</th>
-                        <th>ویرایش</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredFoodsByDate.map((food) => (
-                        <tr key={food.id}>
-                          <td>{food.foodName}</td>
-                          <td>{food.date}</td>
-                          <td>{food.foodCategory}</td>
-                          <td>{food.quantity}</td>
-                          <td>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                deleteFoodReservationHandler(
-                                  food.id,
-                                  food.foodName
-                                )
-                              }
-                              className="delete-button"
-                            >
-                              حذف
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              type="button"
-                              className="edit-button"
-                              onClick={() => editFoodReservationHandler(food)}
-                            >
-                              ویرایش
-                            </button>
-                          </td>
+                  {filteredFoodsByDate.length > 0 ?
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>نام غذا</th>
+                          <th>تاریخ رزرو</th>
+                          <th>وعده</th>
+                          <th>تعداد</th>
+                          <th>حذف</th>
+                          <th>ویرایش</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+
+                      <tbody>
+                        {filteredFoodsByDate.map((food, index) => (
+                          <tr key={food.id ?? `${food.foodName}-${index}`}>
+                            <td>{food.foodName}</td>
+                            <td>{food.date}</td>
+                            <td>{food.foodCategory}</td>
+                            <td>{food.quantity}</td>
+                            <td>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  deleteFoodReservationHandler(
+                                    food.id,
+                                    food.foodName,
+                                  )
+                                }
+                                className="delete-button"
+                              >
+                                حذف
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                className="edit-button"
+                                onClick={() => editFoodReservationHandler(food)}
+                              >
+                                ویرایش
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  : <p className="search-results-none">
+                      هیچ غذای رزروشده‌ای برای نمایش وجود ندارد.
+                    </p>
+                  }
                 </div>
               </div>
             </React.Fragment>
-          ) : (
-            <h3 className="search-results-none">نتیجه ای یافت نشد!</h3>
-          )
-        ) : null}
+          : <h3 className="search-results-none">نتیجه ای یافت نشد!</h3>
+        : null}
       </div>
+
       <Footer />
     </React.Fragment>
   );

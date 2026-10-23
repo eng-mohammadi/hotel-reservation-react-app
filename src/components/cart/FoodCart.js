@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { loadCart, saveCart } from "../../utils/localStorage";
 import NavbarMenu from "../navbarMenu/NavbarMenu";
 import Footer from "../footer/Footer";
@@ -14,92 +14,99 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const FoodCart = ({ selectedFoodReservation }) => {
-  const initialCart = loadCart();
-  const [items, setItems] = useState(initialCart);
+  const [items, setItems] = useState(() => loadCart());
+
+  useEffect(() => {
+    saveCart(items);
+  }, [items]);
+
   const dispatch = useDispatch();
   const [addFoodReservation, { isLoading: isAddingFoodReservation }] =
     useAddFoodReservationMutation();
   const [editFoodReservation] = useEditFoodReservationMutation();
   const [quantity, setQuantity] = useState(
-    selectedFoodReservation?.quantity || 0
+    selectedFoodReservation?.quantity || 0,
   );
   const [totalPrice, setTotalPrice] = useState(
-    selectedFoodReservation?.totalPrice || 0
+    selectedFoodReservation?.totalPrice || 0,
   );
 
   const navigate = useNavigate();
 
   const removeFromCart = (foodName) => {
-    setItems((prevItems) => {
-      const newItems = prevItems.filter((item) => item.foodName !== foodName);
-      saveCart(newItems);
-      dispatch(decreaseCounter());
-      return newItems;
-    });
+    setItems((prevItems) =>
+      prevItems.filter((item) => item.foodName !== foodName),
+    );
+    dispatch(decreaseCounter());
   };
 
   const plusFoodHandler = (foodName) => {
-    setItems((prevItems) => {
-      const newItems = prevItems.map((item) =>
-        item.foodName === foodName
-          ? {
-              ...item,
-              quantity: item.quantity + 1,
-              totalPrice: item.foodPrice * (item.quantity + 1),
-            }
-          : item
-      );
-
-      saveCart(newItems);
-      return newItems;
-    });
-
-    setQuantity((prevQuantity) => prevQuantity + 1);
-    setTotalPrice(
-      (prevTotalPrice) => prevTotalPrice + selectedFoodReservation.foodPrice
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.foodName === foodName ?
+          {
+            ...item,
+            quantity: Number(item.quantity || 0) + 1,
+            totalPrice:
+              Number(item.foodPrice || 0) * (Number(item.quantity || 0) + 1),
+          }
+        : item,
+      ),
     );
+
+    if (selectedFoodReservation) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+      setTotalPrice(
+        (prevTotalPrice) =>
+          prevTotalPrice + Number(selectedFoodReservation.foodPrice || 0),
+      );
+    }
   };
 
   const minusFoodHandler = (foodName) => {
-    setItems((prevItems) => {
-      const newItem = prevItems.map((item) =>
-        item.foodName === foodName
-          ? {
-              ...item,
-              quantity: item.quantity > 1 ? item.quantity - 1 : 1,
-              totalPrice:
-                item.quantity > 1
-                  ? item.foodPrice * (item.quantity - 1)
-                  : item.foodPrice,
-            }
-          : item
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.foodName !== foodName) return item;
+
+        const nextQuantity = Math.max(1, Number(item.quantity || 1) - 1);
+        return {
+          ...item,
+          quantity: nextQuantity,
+          totalPrice: Number(item.foodPrice || 0) * nextQuantity,
+        };
+      }),
+    );
+
+    if (selectedFoodReservation) {
+      setQuantity((prevQuantity) =>
+        Math.max(
+          Number(selectedFoodReservation.quantity || 1),
+          prevQuantity - 1,
+        ),
       );
-
-      saveCart(newItem);
-      return newItem;
-    });
-
-    setQuantity((prevQuantity) =>
-      prevQuantity > selectedFoodReservation.quantity
-        ? prevQuantity - 1
-        : selectedFoodReservation.quantity
-    );
-    setTotalPrice((prevTotalPrice) =>
-      prevTotalPrice > selectedFoodReservation.totalPrice
-        ? prevTotalPrice - selectedFoodReservation.totalPrice
-        : selectedFoodReservation.totalPrice
-    );
+      setTotalPrice((prevTotalPrice) =>
+        Math.max(
+          Number(selectedFoodReservation.totalPrice || 0),
+          prevTotalPrice - Number(selectedFoodReservation.foodPrice || 0),
+        ),
+      );
+    }
   };
 
   const submitFoodReservationHandler = (event) => {
     event.preventDefault();
     window.alert("سفارش غذای شما با موفقیت انجام شد");
-    const items = JSON.parse(window.localStorage.getItem("cartItems") || []);
-    items.forEach((item) => {
+
+    const cartItems = JSON.parse(
+      window.localStorage.getItem("cartItems") || "[]",
+    );
+
+    cartItems.forEach((item) => {
       addFoodReservation(item);
     });
+
     navigate("/");
-    window.localStorage.clear("cartItems");
+    window.localStorage.removeItem("cartItems");
     dispatch(resetCounter());
   };
 
@@ -117,6 +124,7 @@ const FoodCart = ({ selectedFoodReservation }) => {
   return (
     <React.Fragment>
       <NavbarMenu />
+
       {selectedFoodReservation && (
         <div className="food-reservation">
           <table>
@@ -145,35 +153,33 @@ const FoodCart = ({ selectedFoodReservation }) => {
                       onClick={() =>
                         plusFoodHandler(selectedFoodReservation.foodName)
                       }
-                    ></i>
+                    />
                     <i
                       className="fas fa-minus"
                       onClick={() =>
                         minusFoodHandler(selectedFoodReservation.foodName)
                       }
-                    ></i>
+                    />
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+
           <div className="total-price">
-            <h3>
-              جمع کل:
-              {totalPrice.toLocaleString("fa-IR")}
-              تومان
-            </h3>
-            <form onSubmit={(event) => submitEditFoodReservationHandler(event)}>
+            <h3>جمع کل: {totalPrice.toLocaleString("fa-IR")} تومان</h3>
+            <form onSubmit={submitEditFoodReservationHandler}>
               <button type="submit">ذخیره تغییرات</button>
             </form>
           </div>
         </div>
       )}
-      {items.length === 0 && !selectedFoodReservation ? (
+
+      {items.length === 0 && !selectedFoodReservation ?
         <h3 className="error-title">هنوز غذایی سفارش داده نشده است!</h3>
-      ) : (
-        <div className="cart-box">
-          <h2>لیست غذای های رزرو اولیه</h2>
+      : <div className="cart-box">
+          <h2>لیست غذاهای رزرو اولیه</h2>
+
           <table>
             <thead>
               <tr>
@@ -189,7 +195,7 @@ const FoodCart = ({ selectedFoodReservation }) => {
             </thead>
             <tbody>
               {items.map((item) => (
-                <tr key={item.id}>
+                <tr key={item.id ?? item.foodName}>
                   <td>{item.foodName}</td>
                   <td>{item.foodCategory}</td>
                   <td>{item.foodPrice.toLocaleString("fa-IR")} تومان</td>
@@ -201,12 +207,12 @@ const FoodCart = ({ selectedFoodReservation }) => {
                       <i
                         className="fas fa-plus"
                         onClick={() => plusFoodHandler(item.foodName)}
-                      ></i>
+                      />
                       {item.quantity}
                       <i
                         className="fas fa-minus"
                         onClick={() => minusFoodHandler(item.foodName)}
-                      ></i>
+                      />
                     </div>
                   </td>
                   <td>
@@ -219,22 +225,24 @@ const FoodCart = ({ selectedFoodReservation }) => {
               ))}
             </tbody>
           </table>
+
           <div className="total-price">
             <h3>
-              جمع کل:
+              جمع کل:{" "}
               {items
                 .reduce((acc, item) => acc + item.totalPrice, 0)
-                .toLocaleString("fa-IR")}
+                .toLocaleString("fa-IR")}{" "}
               تومان
             </h3>
-            <form onSubmit={(event) => submitFoodReservationHandler(event)}>
+            <form onSubmit={submitFoodReservationHandler}>
               <button type="submit" disabled={isAddingFoodReservation}>
                 تایید و پرداخت
               </button>
             </form>
           </div>
         </div>
-      )}
+      }
+
       <Footer />
     </React.Fragment>
   );

@@ -11,7 +11,7 @@ const RoomDetails = () => {
   const { data: accounting } = useGetAccountingQuery();
   const params = useParams();
   const [index, setIndex] = useState(0);
-  const imgRef = useRef();
+  const imgRef = useRef(null);
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
   const likeNodeRef = useRef(null);
@@ -19,9 +19,9 @@ const RoomDetails = () => {
   const navigate = useNavigate();
 
   const reservedRoom = () => {
-    if (accounting.length === 0) {
+    if (!accounting?.length) {
       window.alert(
-        "لطفا برای رزرو اتاق ابتدا از تب ورود/ثبت نام وارد حساب کاربری شوید."
+        "لطفا برای رزرو اتاق ابتدا از تب ورود/ثبت نام وارد حساب کاربری شوید.",
       );
     } else {
       navigate("/roomReservation/newReservation");
@@ -31,11 +31,13 @@ const RoomDetails = () => {
   if (error) {
     return <h1 className="error-title">خطا: {error.message}</h1>;
   }
+
   if (isLoading) {
     return <h2 className="loading-title">در حال بارگذاری...</h2>;
   }
 
-  const room = rooms.find((room) => room.name === params.name);
+  const room = rooms?.find((room) => room.name === params.name);
+
   if (!room) {
     return <h3 className="error-title">اتاق مورد نظر یافت نشد</h3>;
   }
@@ -46,15 +48,17 @@ const RoomDetails = () => {
 
   const goPrev = () => {
     setIndex(
-      (prevIndex) => (prevIndex - 1 + room.images.length) % room.images.length
+      (prevIndex) => (prevIndex - 1 + room.images.length) % room.images.length,
     );
   };
 
   return (
     <React.Fragment>
       <NavbarMenu />
+
       <div className="room-details">
         <h1 className="room-details_title">{room.name}</h1>
+
         <CSSTransition
           key={index}
           nodeRef={imgRef}
@@ -62,28 +66,28 @@ const RoomDetails = () => {
           classNames="room-details__slider"
         >
           <div className="room-details__images">
-            <img
-              src={room.images[index]}
-              alt={`${room.name}-${index}`}
-              ref={imgRef}
-            />
+            [{room.images[index]}]({room.images[index]})
           </div>
         </CSSTransition>
+
         <div className="room-details__buttons">
           <i onClick={goPrev} className="fa-solid fa-angle-right"></i>
           <i onClick={goNext} className="fa-solid fa-angle-left"></i>
         </div>
+
         <div className="room-details__content">
           <div className="room-amenities">
             <p>ظرفیت: {room.capacity} نفر</p>
             <p>قیمت هر شب: {room.pricePerNight} تومان</p>
             <p>امکانات اتاق:</p>
-            {room.amenities.map((amenity) => (
-              <ul>
-                <li>{amenity}</li>
-              </ul>
-            ))}
+
+            <ul>
+              {room.amenities.map((amenity, amenityIndex) => (
+                <li key={`${room.id}-${amenityIndex}`}>{amenity}</li>
+              ))}
+            </ul>
           </div>
+
           <div className="hotel-amenities">
             <p>امکانات هتل:</p>
             <ul>
@@ -101,6 +105,7 @@ const RoomDetails = () => {
               </li>
             </ul>
           </div>
+
           <div className="room-details__icons">
             <CSSTransition
               nodeRef={likeNodeRef}
@@ -118,6 +123,7 @@ const RoomDetails = () => {
                 ref={likeNodeRef}
               ></i>
             </CSSTransition>
+
             <CSSTransition
               nodeRef={dislikeNodeRef}
               in={dislike}
@@ -135,6 +141,7 @@ const RoomDetails = () => {
               ></i>
             </CSSTransition>
           </div>
+
           <div className="room-reserve__button">
             <button type="button" onClick={reservedRoom}>
               رزرو اتاق
@@ -142,6 +149,7 @@ const RoomDetails = () => {
           </div>
         </div>
       </div>
+
       <Footer />
     </React.Fragment>
   );
