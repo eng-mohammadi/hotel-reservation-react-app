@@ -1,0 +1,101 @@
+@import "../../../styles/_fonts";
+@import "../../../styles/_generals";
+
+.food-cards {
+  width: 100%;
+  height: 370px;
+  padding: 10px;
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  .hide-show-icon__food {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -8px;
+    z-index: 1;
+    cursor: pointer;
+    i {
+      font-size: 1.8rem;
+      color: #0f875d;
+      &:hover {
+        color: #e93b87;
+      }
+    }
+  }
+}
+
+.translate-like-icon-enter {
+  transform-origin: left bottom;
+  transform: rotate(0deg);
+}
+.translate-like-icon-enter-active {
+  transform: rotate(-30deg);
+  transition: transform 300ms ease-in;
+}
+.translate-like-icon-exit {
+  transform-origin: left bottom;
+  transform: rotate(-30deg);
+}
+.translate-like-icon-exit-active {
+  transform: rotate(0deg);
+  transition: transform 300ms ease-out;
+}
+
+.translate-dislike-icon-enter {
+  transform-origin: left bottom;
+  transform: rotate(0deg);
+}
+.translate-dislike-icon-enter-active {
+  transform: rotate(30deg);
+  transition: transform 300ms ease-in;
+}
+.translate-dislike-icon-exit {
+  transform-origin: left bottom;
+  transform: rotate(30deg);
+}
+.translate-dislike-icon-exit-active {
+  transform: rotate(0deg);
+  transition: transform 300ms ease-out;
+}
+
+@keyframes hingeWaveLike {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+}
+.translate-like-icon-enter-active {
+  animation: hingeWaveLike 300ms ease-in forwards;
+}
+.translate-like-icon-exit-active {
+  animation: hingeWaveLike 300ms ease-out reverse forwards;
+}
+
+@keyframes hingeWaveDislike {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+}
+.translate-dislike-icon-enter-active {
+  animation: hingeWaveDislike 300ms ease-in forwards;
+}
+.translate-dislike-icon-exit-active {
+  animation: hingeWaveDislike 300ms ease-out reverse forwards;
+}

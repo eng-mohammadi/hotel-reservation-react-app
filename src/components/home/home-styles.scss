@@ -1,0 +1,9 @@
+@import "../../styles/_fonts";
+@import "../../styles/_generals";
+
+.aside-main__container {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  gap: 20px;
+}

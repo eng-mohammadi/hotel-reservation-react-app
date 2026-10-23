@@ -1,0 +1,4 @@
+export const FILTER_ROOMS_BY_DATE = "FILTER_ROOMS_BY_DATE";
+export const FILTER_FOODS_BY_DATE = "FILTER_FOODS_BY_DATE";
+export const SET_ROOMS = "SET_ROOMS";
+export const SET_FOODS = "SET_FOODS";

@@ -1,0 +1,81 @@
+@import "../../../styles/_fonts";
+@import "../../../styles/_generals";
+
+.reservation-form {
+  width: 80%;
+  margin: 30px auto;
+  padding: 10px;
+  fieldset {
+    border-radius: 15px;
+    box-shadow: 10px 15px 20px rgba(125, 54, 89, 0.5);
+    background-color: #d9e6e4;
+    legend {
+      font-weight: "Vazir 700";
+      color: $primary-text__color;
+      font-size: 1.5rem;
+    }
+  }
+  form {
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: separate;
+      border-spacing: 15px;
+      tbody {
+        tr {
+          td {
+            label {
+              font-family: "Vazir 500";
+            }
+            input {
+              width: 100%;
+              border: 1px solid #000;
+              border-radius: 5px;
+              padding: 10px 15px;
+              font-family: "Vazir 500";
+              &:focus {
+                border-color: $primary-color;
+                outline: none;
+              }
+            }
+            select {
+              padding: 8px 10px;
+              border: 1px solid #000;
+              border-radius: 5px;
+              option {
+                font-family: "Iran Sans 700";
+              }
+            }
+            textarea {
+              font-family: "Vazir 500";
+              &:focus {
+                border-color: $primary-color;
+                outline: none;
+              }
+            }
+            button {
+              border: 1px solid #000;
+              border-radius: 8px;
+              padding: 10px 15px;
+              background-color: $form-login-bg-color;
+              font-family: "Vazir 700";
+              margin: 8px;
+              &:hover {
+                background-color: darken($form-login-bg-color, 40%);
+                color: #fff;
+                cursor: pointer;
+              }
+            }
+          }
+          .error-message {
+            vertical-align: top;
+            text-align: end;
+            font-family: "Vazir 300";
+            font-size: 0.8rem;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}

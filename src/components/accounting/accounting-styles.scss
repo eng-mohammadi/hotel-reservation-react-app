@@ -1,0 +1,32 @@
+@import "../../styles/_fonts";
+@import "../../styles/_generals";
+
+.accounting-links {
+  width: 100%;
+  ul {
+    li {
+      list-style: none;
+      display: inline-block;
+      width: 75px;
+      height: 45px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 25px;
+      text-align: center;
+      background-color: lighten($secondary-color, 35%);
+      a {
+        text-decoration: none;
+        font-family: "Vazir 700";
+        color: $primary-text__color;
+        &:hover {
+          color: #fff;
+        }
+      }
+      &:hover {
+        background-color: invert($secondary-color, 40%);
+        cursor: pointer;
+      }
+    }
+  }
+}
